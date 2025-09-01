@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { Stack, Card, Pagination, Alert } from '@mantine/core'
+import { Stack, Card, Pagination, Alert, Container } from '@mantine/core'
 import { IconAlertCircle } from '@tabler/icons-react'
 import { Product, ProductFormData } from '@/types/product'
 import { useProducts } from '@/hooks/useProducts'
@@ -9,8 +9,10 @@ import { PageHeader } from '@/components/common/PageHeader'
 import { SearchAndFilter } from '@/components/common/SearchAndFilter'
 import { ProductsTable } from '@/components/tables/ProductsTable'
 import { ProductModal } from '@/components/modals/ProductModal'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export function ProductsPage() {
+  const { isDark } = useTheme()
   const {
     products,
     loading,
@@ -154,64 +156,66 @@ export function ProductsPage() {
   ]
 
   return (
-    <Stack gap="lg">
-      <PageHeader
-        title="مدیریت محصولات"
-        description="مدیریت کاتالوگ محصولات و موجودی"
-        actionLabel="افزودن محصول"
-        onAction={handleAddProduct}
-      />
+    <Container size="xl" py="md" px={isDark ? "xs" : "md"}>
+      <Stack gap="lg">
+        <PageHeader
+          title="مدیریت محصولات"
+          description="مدیریت کاتالوگ محصولات و موجودی"
+          actionLabel="افزودن محصول"
+          onAction={handleAddProduct}
+        />
 
-      <SearchAndFilter
-        searchQuery={filters.searchQuery}
-        onSearchChange={(value) => setFilters(prev => ({ ...prev, searchQuery: value }))}
-        filters={filterOptions}
-        onReset={handleResetFilters}
-        searchPlaceholder="جستجو در نام محصول، کد محصول یا دسته‌بندی..."
-      />
+        <SearchAndFilter
+          searchQuery={filters.searchQuery}
+          onSearchChange={(value) => setFilters(prev => ({ ...prev, searchQuery: value }))}
+          filters={filterOptions}
+          onReset={handleResetFilters}
+          searchPlaceholder="جستجو در نام محصول، کد محصول یا دسته‌بندی..."
+        />
 
-      {products.length === 0 ? (
-        <Alert
-          icon={<IconAlertCircle size={16} />}
-          title="هیچ محصولی یافت نشد"
-          color="blue"
-        >
-          محصولی با فیلترهای انتخاب شده یافت نشد. لطفاً فیلترها را تغییر دهید یا محصول جدیدی اضافه کنید.
-        </Alert>
-      ) : (
-        <Card padding="lg" radius="md" withBorder>
-          <ProductsTable
-            products={paginatedProducts}
-            onView={handleViewProduct}
-            onEdit={handleEditProduct}
-            onDelete={handleDeleteProduct}
-          />
-          
-          {totalPages > 1 && (
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
-              <Pagination
-                total={totalPages}
-                value={currentPage}
-                onChange={setCurrentPage}
-                withEdges
-              />
-            </div>
-          )}
-        </Card>
-      )}
+        {products.length === 0 ? (
+          <Alert
+            icon={<IconAlertCircle size={16} />}
+            title="هیچ محصولی یافت نشد"
+            color="blue"
+          >
+            محصولی با فیلترهای انتخاب شده یافت نشد. لطفاً فیلترها را تغییر دهید یا محصول جدیدی اضافه کنید.
+          </Alert>
+        ) : (
+          <Card padding="lg" radius="md" withBorder>
+            <ProductsTable
+              products={paginatedProducts}
+              onView={handleViewProduct}
+              onEdit={handleEditProduct}
+              onDelete={handleDeleteProduct}
+            />
+            
+            {totalPages > 1 && (
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+                <Pagination
+                  total={totalPages}
+                  value={currentPage}
+                  onChange={setCurrentPage}
+                  withEdges
+                />
+              </div>
+            )}
+          </Card>
+        )}
 
-      <ProductModal
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-        product={selectedProduct}
-        formData={formData}
-        onFormChange={setFormData}
-        onSubmit={handleSubmit}
-        onDelete={handleConfirmDelete}
-        loading={loading}
-        errors={formErrors}
-        mode={modalMode}
-      />
-    </Stack>
+        <ProductModal
+          opened={modalOpened}
+          onClose={() => setModalOpened(false)}
+          product={selectedProduct}
+          formData={formData}
+          onFormChange={setFormData}
+          onSubmit={handleSubmit}
+          onDelete={handleConfirmDelete}
+          loading={loading}
+          errors={formErrors}
+          mode={modalMode}
+        />
+      </Stack>
+    </Container>
   )
 }

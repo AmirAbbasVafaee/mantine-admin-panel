@@ -1,16 +1,30 @@
 "use client"
 
 import { useState } from 'react'
-import { Stack, Card, Pagination, Alert } from '@mantine/core'
-import { IconAlertCircle } from '@tabler/icons-react'
-import { User, UserFormData } from '@/types/user'
-import { useUsers } from '@/hooks/useUsers'
+import { Container, Title, Text, Group, Button, Stack, Box } from '@mantine/core'
+import { IconPlus } from '@tabler/icons-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SearchAndFilter } from '@/components/common/SearchAndFilter'
 import { UsersTable } from '@/components/tables/UsersTable'
 import { UserModal } from '@/components/modals/UserModal'
+import { useUsers } from '@/hooks/useUsers'
+import { User, UserFormData } from '@/types/user'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export function UsersPage() {
+  const { isDark } = useTheme()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalMode, setModalMode] = useState<'add' | 'edit' | 'view' | 'delete'>('add')
+  const [selectedUser, setSelectedUser] = useState<User | null>(null)
+  const [formData, setFormData] = useState<UserFormData>({
+    name: '',
+    email: '',
+    phone: '',
+    role: 'user',
+    status: 'active'
+  })
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
+  
   const {
     users,
     loading,
@@ -22,26 +36,6 @@ export function UsersPage() {
     validateForm
   } = useUsers()
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [selectedUser, setSelectedUser] = useState<User | null>(null)
-  const [modalMode, setModalMode] = useState<'add' | 'edit' | 'view' | 'delete'>('add')
-  const [modalOpened, setModalOpened] = useState(false)
-  const [formData, setFormData] = useState<UserFormData>({
-    name: '',
-    email: '',
-    phone: '',
-    role: 'user',
-    status: 'active'
-  })
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
-
-  const itemsPerPage = 10
-  const totalPages = Math.ceil(users.length / itemsPerPage)
-  const paginatedUsers = users.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  )
-
   const handleAddUser = () => {
     setFormData({
       name: '',
@@ -52,7 +46,8 @@ export function UsersPage() {
     })
     setFormErrors({})
     setModalMode('add')
-    setModalOpened(true)
+    setSelectedUser(null)
+    setIsModalOpen(true)
   }
 
   const handleEditUser = (user: User) => {
@@ -64,24 +59,30 @@ export function UsersPage() {
       status: user.status
     })
     setFormErrors({})
-    setSelectedUser(user)
     setModalMode('edit')
-    setModalOpened(true)
+    setSelectedUser(user)
+    setIsModalOpen(true)
   }
 
   const handleViewUser = (user: User) => {
-    setSelectedUser(user)
     setModalMode('view')
-    setModalOpened(true)
+    setSelectedUser(user)
+    setIsModalOpen(true)
   }
 
   const handleDeleteUser = (user: User) => {
-    setSelectedUser(user)
     setModalMode('delete')
-    setModalOpened(true)
+    setSelectedUser(user)
+    setIsModalOpen(true)
   }
 
-  const handleSubmit = async () => {
+  const handleModalClose = () => {
+    setIsModalOpen(false)
+    setSelectedUser(null)
+    setFormErrors({})
+  }
+
+  const handleFormSubmit = async () => {
     const errors = validateForm(formData)
     setFormErrors(errors)
 
@@ -89,120 +90,82 @@ export function UsersPage() {
       return
     }
 
-    let result
     if (modalMode === 'add') {
-      result = await addUser(formData)
+      await addUser(formData)
     } else if (modalMode === 'edit' && selectedUser) {
-      result = await updateUser(selectedUser.id, formData)
+      await updateUser(selectedUser.id, formData)
     }
-
-    if (result?.success) {
-      setModalOpened(false)
-      setFormErrors({})
-    }
+    handleModalClose()
   }
 
-  const handleConfirmDelete = async () => {
+  const handleDeleteConfirm = async () => {
     if (selectedUser) {
-      const result = await deleteUser(selectedUser.id)
-      if (result?.success) {
-        setModalOpened(false)
-      }
+      await deleteUser(selectedUser.id)
+      handleModalClose()
     }
   }
-
-  const handleResetFilters = () => {
-    setFilters({
-      searchQuery: '',
-      statusFilter: null,
-      roleFilter: null
-    })
-  }
-
-  const filterOptions = [
-    {
-      key: 'status',
-      label: 'وضعیت',
-      value: filters.statusFilter,
-      onChange: (value: string | null) => setFilters(prev => ({ ...prev, statusFilter: value })),
-      data: [
-        { value: 'active', label: 'فعال' },
-        { value: 'inactive', label: 'غیرفعال' },
-        { value: 'suspended', label: 'معلق' }
-      ]
-    },
-    {
-      key: 'role',
-      label: 'نقش',
-      value: filters.roleFilter,
-      onChange: (value: string | null) => setFilters(prev => ({ ...prev, roleFilter: value })),
-      data: [
-        { value: 'admin', label: 'مدیر' },
-        { value: 'moderator', label: 'ناظر' },
-        { value: 'user', label: 'کاربر' }
-      ]
-    }
-  ]
 
   return (
-    <Stack gap="lg">
-      <PageHeader
-        title="مدیریت کاربران"
-        description="مدیریت کاربران سیستم و تنظیمات دسترسی"
-        actionLabel="افزودن کاربر"
-        onAction={handleAddUser}
-      />
+    <Container size="xl" py="md" px={isDark ? "xs" : "md"}>
+      <Stack gap="lg">
+        <PageHeader
+          title="مدیریت کاربران"
+          description="افزودن، ویرایش و مدیریت کاربران سیستم"
+          actionLabel="افزودن کاربر جدید"
+          onAction={handleAddUser}
+        />
 
-      <SearchAndFilter
-        searchQuery={filters.searchQuery}
-        onSearchChange={(value) => setFilters(prev => ({ ...prev, searchQuery: value }))}
-        filters={filterOptions}
-        onReset={handleResetFilters}
-        searchPlaceholder="جستجو در نام، ایمیل یا شماره تلفن..."
-      />
+        <SearchAndFilter
+          searchQuery={filters.searchQuery}
+          onSearchChange={(value) => setFilters(prev => ({ ...prev, searchQuery: value }))}
+          filters={[
+            {
+              key: 'status',
+              label: 'وضعیت',
+              value: filters.statusFilter,
+              onChange: (value: string | null) => setFilters(prev => ({ ...prev, statusFilter: value })),
+              data: [
+                { value: 'active', label: 'فعال' },
+                { value: 'inactive', label: 'غیرفعال' },
+                { value: 'suspended', label: 'معلق' }
+              ]
+            },
+            {
+              key: 'role',
+              label: 'نقش',
+              value: filters.roleFilter,
+              onChange: (value: string | null) => setFilters(prev => ({ ...prev, roleFilter: value })),
+              data: [
+                { value: 'admin', label: 'مدیر' },
+                { value: 'moderator', label: 'ناظر' },
+                { value: 'user', label: 'کاربر' }
+              ]
+            }
+          ]}
+          onReset={() => setFilters({ searchQuery: '', statusFilter: null, roleFilter: null })}
+          searchPlaceholder="جستجو در کاربران..."
+        />
 
-      {users.length === 0 ? (
-        <Alert
-          icon={<IconAlertCircle size={16} />}
-          title="هیچ کاربری یافت نشد"
-          color="blue"
-        >
-          کاربری با فیلترهای انتخاب شده یافت نشد. لطفاً فیلترها را تغییر دهید یا کاربر جدیدی اضافه کنید.
-        </Alert>
-      ) : (
-        <Card padding="lg" radius="md" withBorder>
-          <UsersTable
-            users={paginatedUsers}
-            onView={handleViewUser}
-            onEdit={handleEditUser}
-            onDelete={handleDeleteUser}
-          />
-          
-          {totalPages > 1 && (
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
-              <Pagination
-                total={totalPages}
-                value={currentPage}
-                onChange={setCurrentPage}
-                withEdges
-              />
-            </div>
-          )}
-        </Card>
-      )}
+        <UsersTable
+          users={users}
+          onEdit={handleEditUser}
+          onView={handleViewUser}
+          onDelete={handleDeleteUser}
+        />
 
-      <UserModal
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-        user={selectedUser}
-        formData={formData}
-        onFormChange={setFormData}
-        onSubmit={handleSubmit}
-        onDelete={handleConfirmDelete}
-        loading={loading}
-        errors={formErrors}
-        mode={modalMode}
-      />
-    </Stack>
+        <UserModal
+          opened={isModalOpen}
+          onClose={handleModalClose}
+          mode={modalMode}
+          user={selectedUser}
+          formData={formData}
+          onFormChange={setFormData}
+          onSubmit={handleFormSubmit}
+          onDelete={handleDeleteConfirm}
+          loading={loading}
+          errors={formErrors}
+        />
+      </Stack>
+    </Container>
   )
 }

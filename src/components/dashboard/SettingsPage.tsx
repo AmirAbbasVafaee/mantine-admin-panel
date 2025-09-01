@@ -18,7 +18,8 @@ import {
   Divider,
   Textarea,
   Box,
-  SimpleGrid
+  SimpleGrid,
+  Container
 } from '@mantine/core'
 import { 
   IconUser, 
@@ -37,8 +38,10 @@ import {
   SecuritySettings, 
   SystemSettings 
 } from '@/types/settings'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export function SettingsPage() {
+  const { isDark } = useTheme()
   const [activeTab, setActiveTab] = useState('profile')
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false)
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false)
@@ -132,12 +135,13 @@ export function SettingsPage() {
   }
 
   return (
-    <Stack gap="lg">
-      <Group justify="space-between">
-        <Box>
-          <Title order={2} mb="xs">تنظیمات</Title>
-          <Text c="dimmed">مدیریت تنظیمات سیستم و حساب کاربری</Text>
-        </Box>
+    <Container size="xl" py="md" px={isDark ? "xs" : "md"}>
+      <Stack gap="lg">
+        <Group justify="space-between">
+          <Box>
+            <Title order={2} mb="xs" c={isDark ? '#ffffff' : '#000000'}>تنظیمات</Title>
+            <Text c={isDark ? '#adb5bd' : 'dimmed'}>مدیریت تنظیمات سیستم و حساب کاربری</Text>
+          </Box>
         <Button 
           leftSection={<IconDeviceFloppy size={16} />} 
           onClick={() => console.log('Saving all settings')}
@@ -656,6 +660,7 @@ export function SettingsPage() {
           </Group>
         </Stack>
       </Modal>
-    </Stack>
-  )
+        </Stack>
+      </Container>
+    )
 }

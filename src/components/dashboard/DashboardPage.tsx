@@ -1,24 +1,24 @@
 "use client"
 
-import { 
-  Stack, 
-  Card, 
-  Group, 
-  Text, 
-  Title, 
-  SimpleGrid, 
-  Progress, 
-  RingProgress, 
+import {
+  Stack,
+  Card,
+  Group,
+  Text,
+  Title,
+  SimpleGrid,
+  Progress,
+  RingProgress,
   Badge,
   Grid,
   Container,
   Box,
-  ThemeIcon
+  ThemeIcon,
 } from '@mantine/core'
-import { 
-  IconTrendingUp, 
-  IconUsers, 
-  IconShoppingCart, 
+import {
+  IconTrendingUp,
+  IconUsers,
+  IconShoppingCart,
   IconCurrencyDollar,
   IconPackage,
   IconStar,
@@ -26,8 +26,11 @@ import {
   IconArrowUpRight,
   IconArrowDownRight
 } from '@tabler/icons-react'
+import { useResponsive } from '@/hooks/useResponsive'
 
 export function DashboardPage() {
+  const { isMobile, isTablet } = useResponsive()
+  
   // Mock dashboard data
   const dashboardData = {
     stats: {
@@ -98,99 +101,111 @@ export function DashboardPage() {
   }
 
   return (
-    <Container size="xl" py="md">
+    <Container size="xl" py="md" px={isMobile ? "xs" : "md"}>
       <Stack gap="lg">
         {/* Page Header */}
-        <Group justify="space-between">
-          <Box>
-            <Title order={2} mb="xs">داشبورد اصلی</Title>
-            <Text c="dimmed">نمای کلی عملکرد سیستم و آمار فروش</Text>
+        <Group justify="space-between" wrap="wrap" gap="md">
+          <Box style={{ minWidth: 0, flex: 1 }}>
+            <Title order={2} mb="xs" style={{ fontSize: isMobile ? '1.5rem' : '2rem' }}>
+              داشبورد اصلی
+            </Title>
+            <Text c="dimmed" size={isMobile ? "sm" : "md"}>
+              نمای کلی عملکرد سیستم و آمار فروش
+            </Text>
           </Box>
-          <Badge color="green" size="lg">
-            <IconActivity size={14} style={{ marginLeft: '4px' }} />
+          <Badge color="green" size={isMobile ? "md" : "lg"}>
+            <IconActivity size={isMobile ? 12 : 14} style={{ marginLeft: '4px' }} />
             سیستم فعال
           </Badge>
         </Group>
 
         {/* Key Metrics Cards */}
-        <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }}>
-          <Card padding="lg" radius="md" withBorder>
-            <Group justify="space-between">
-              <div>
+        <SimpleGrid cols={{ base: 1, sm: 2, lg: 4 }} spacing={isMobile ? "xs" : "md"}>
+          <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+            <Group justify="space-between" wrap="nowrap">
+              <Box style={{ minWidth: 0, flex: 1 }}>
                 <Text size="xs" c="dimmed" tt="uppercase" fw={700}>فروش کل</Text>
-                <Text fw={700} size="xl">{dashboardData.stats.totalRevenue} تومان</Text>
-                <Group gap="xs" mt="xs">
+                <Text fw={700} size={isMobile ? "lg" : "xl"} style={{ wordBreak: 'break-word' }}>
+                  {dashboardData.stats.totalRevenue} تومان
+                </Text>
+                <Group gap="xs" mt="xs" wrap="nowrap">
                   <IconArrowUpRight size={16} color="green" />
                   <Text size="sm" c="green" fw={500}>{dashboardData.stats.growthRate}</Text>
                 </Group>
-              </div>
-              <ThemeIcon size="lg" variant="light" color="green">
-                <IconCurrencyDollar size={20} />
+              </Box>
+              <ThemeIcon size={isMobile ? "md" : "lg"} variant="light" color="green">
+                <IconCurrencyDollar size={isMobile ? 16 : 20} />
               </ThemeIcon>
             </Group>
           </Card>
 
-          <Card padding="lg" radius="md" withBorder>
-            <Group justify="space-between">
-              <div>
+          <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+            <Group justify="space-between" wrap="nowrap">
+              <Box style={{ minWidth: 0, flex: 1 }}>
                 <Text size="xs" c="dimmed" tt="uppercase" fw={700}>سفارشات</Text>
-                <Text fw={700} size="xl">{dashboardData.stats.totalOrders}</Text>
-                <Group gap="xs" mt="xs">
+                <Text fw={700} size={isMobile ? "lg" : "xl"}>{dashboardData.stats.totalOrders}</Text>
+                <Group gap="xs" mt="xs" wrap="nowrap">
                   <IconArrowUpRight size={16} color="blue" />
                   <Text size="sm" c="blue" fw={500}>{dashboardData.stats.orderGrowth}</Text>
                 </Group>
-              </div>
-              <ThemeIcon size="lg" variant="light" color="blue">
-                <IconShoppingCart size={20} />
+              </Box>
+              <ThemeIcon size={isMobile ? "md" : "lg"} variant="light" color="blue">
+                <IconShoppingCart size={isMobile ? 16 : 20} />
               </ThemeIcon>
             </Group>
           </Card>
 
-          <Card padding="lg" radius="md" withBorder>
-            <Group justify="space-between">
-              <div>
+          <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+            <Group justify="space-between" wrap="nowrap">
+              <Box style={{ minWidth: 0, flex: 1 }}>
                 <Text size="xs" c="dimmed" tt="uppercase" fw={700}>مشتریان</Text>
-                <Text fw={700} size="xl">{dashboardData.stats.totalCustomers}</Text>
-                <Group gap="xs" mt="xs">
+                <Text fw={700} size={isMobile ? "lg" : "xl"}>{dashboardData.stats.totalCustomers}</Text>
+                <Group gap="xs" mt="xs" wrap="nowrap">
                   <IconArrowUpRight size={16} color="purple" />
                   <Text size="sm" c="purple" fw={500}>{dashboardData.stats.customerGrowth}</Text>
                 </Group>
-              </div>
-              <ThemeIcon size="lg" variant="light" color="purple">
-                <IconUsers size={20} />
+              </Box>
+              <ThemeIcon size={isMobile ? "md" : "lg"} variant="light" color="purple">
+                <IconUsers size={isMobile ? 16 : 20} />
               </ThemeIcon>
             </Group>
           </Card>
 
-          <Card padding="lg" radius="md" withBorder>
-            <Group justify="space-between">
-              <div>
+          <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+            <Group justify="space-between" wrap="nowrap">
+              <Box style={{ minWidth: 0, flex: 1 }}>
                 <Text size="xs" c="dimmed" tt="uppercase" fw={700}>محصولات</Text>
-                <Text fw={700} size="xl">{dashboardData.stats.totalProducts}</Text>
-                <Group gap="xs" mt="xs">
+                <Text fw={700} size={isMobile ? "lg" : "xl"}>{dashboardData.stats.totalProducts}</Text>
+                <Group gap="xs" mt="xs" wrap="nowrap">
                   <IconArrowUpRight size={16} color="orange" />
                   <Text size="sm" c="orange" fw={500}>{dashboardData.stats.productGrowth}</Text>
                 </Group>
-              </div>
-              <ThemeIcon size="lg" variant="light" color="orange">
-                <IconPackage size={20} />
+              </Box>
+              <ThemeIcon size={isMobile ? "md" : "lg"} variant="light" color="orange">
+                <IconPackage size={isMobile ? 16 : 20} />
               </ThemeIcon>
             </Group>
           </Card>
         </SimpleGrid>
 
         {/* Charts and Analytics */}
-        <Grid gutter="lg">
+        <Grid gutter={isMobile ? "xs" : "lg"}>
           {/* Sales by Category */}
           <Grid.Col span={{ base: 12, lg: 6 }}>
-            <Card padding="lg" radius="md" withBorder>
-              <Title order={3} mb="lg">فروش بر اساس دسته‌بندی</Title>
+            <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+              <Title order={3} mb="lg" style={{ fontSize: isMobile ? '1.2rem' : '1.5rem' }}>
+                فروش بر اساس دسته‌بندی
+              </Title>
               <Stack gap="md">
                 {dashboardData.salesByCategory.map((item) => (
                   <div key={item.category}>
-                    <Group justify="space-between" mb="xs">
-                      <Text size="sm" fw={500}>{item.category}</Text>
-                      <Text size="sm" c="dimmed">{item.sales} فروش</Text>
+                    <Group justify="space-between" mb="xs" wrap="nowrap">
+                      <Text size="sm" fw={500} style={{ minWidth: 0, flex: 1 }}>
+                        {item.category}
+                      </Text>
+                      <Text size="sm" c="dimmed" style={{ whiteSpace: 'nowrap' }}>
+                        {item.sales} فروش
+                      </Text>
                     </Group>
                     <Progress value={item.percentage} color={item.color} size="sm" />
                   </div>
@@ -201,22 +216,28 @@ export function DashboardPage() {
 
           {/* Recent Orders */}
           <Grid.Col span={{ base: 12, lg: 6 }}>
-            <Card padding="lg" radius="md" withBorder>
-              <Title order={3} mb="lg">سفارشات اخیر</Title>
+            <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+              <Title order={3} mb="lg" style={{ fontSize: isMobile ? '1.2rem' : '1.5rem' }}>
+                سفارشات اخیر
+              </Title>
               <Stack gap="sm">
                 {dashboardData.recentOrders.map((order) => (
-                  <Group key={order.id} justify="space-between" p="xs" style={{ border: '1px solid #f0f0f0', borderRadius: '8px' }}>
-                    <div>
+                  <Group key={order.id} justify="space-between" p="xs" style={{ 
+                    border: '1px solid var(--mantine-color-gray-3)',
+                    borderRadius: '8px',
+                    flexWrap: 'wrap'
+                  }}>
+                    <Box style={{ minWidth: 0, flex: 1 }}>
                       <Text fw={500} size="sm">{order.id}</Text>
                       <Text size="xs" c="dimmed">{order.customer}</Text>
-                    </div>
-                    <div style={{ textAlign: 'left' }}>
+                    </Box>
+                    <Box style={{ textAlign: 'left', minWidth: 0 }}>
                       <Text fw={500} size="sm">{order.amount} تومان</Text>
                       <Badge color={getStatusColor(order.status)} size="xs">
                         {getStatusLabel(order.status)}
                       </Badge>
-                    </div>
-                    <Text size="xs" c="dimmed">{order.date}</Text>
+                    </Box>
+                    <Text size="xs" c="dimmed" style={{ whiteSpace: 'nowrap' }}>{order.date}</Text>
                   </Group>
                 ))}
               </Stack>
@@ -225,42 +246,47 @@ export function DashboardPage() {
         </Grid>
 
         {/* Top Products */}
-        <Card padding="lg" radius="md" withBorder>
-          <Title order={3} mb="lg">محصولات پرفروش</Title>
+        <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+          <Title order={3} mb="lg" style={{ fontSize: isMobile ? '1.2rem' : '1.5rem' }}>
+            محصولات پرفروش
+          </Title>
           <Stack gap="sm">
             {dashboardData.topProducts.map((product, index) => (
-              <Group key={product.name} justify="space-between" p="md" style={{ 
-                border: '1px solid #f0f0f0', 
+              <Group key={product.name} justify="space-between" p={isMobile ? "sm" : "md"} style={{
+                border: '1px solid var(--mantine-color-gray-3)',
                 borderRadius: '8px',
-                backgroundColor: index < 3 ? '#f8f9fa' : 'white'
+                backgroundColor: index < 3 ? 'var(--mantine-color-gray-0)' : 'transparent',
+                flexWrap: 'wrap'
               }}>
-                <Group gap="md">
-                  <Badge color={index < 3 ? 'blue' : 'gray'} size="lg">
+                <Group gap="md" wrap="nowrap">
+                  <Badge color={index < 3 ? 'blue' : 'gray'} size={isMobile ? "md" : "lg"}>
                     #{index + 1}
                   </Badge>
-                  <div>
-                    <Text fw={500}>{product.name}</Text>
+                  <Box style={{ minWidth: 0, flex: 1 }}>
+                    <Text fw={500} size={isMobile ? "sm" : "md"} style={{ wordBreak: 'break-word' }}>
+                      {product.name}
+                    </Text>
                     <Text size="sm" c="dimmed">{product.sales} فروش</Text>
-                  </div>
+                  </Box>
                 </Group>
-                <div style={{ textAlign: 'left' }}>
-                  <Text fw={500}>{product.revenue} تومان</Text>
+                <Box style={{ textAlign: 'left', minWidth: 0 }}>
+                  <Text fw={500} size={isMobile ? "sm" : "md"}>{product.revenue} تومان</Text>
                   <Text size="sm" c="green" fw={500}>{product.growth}</Text>
-                </div>
+                </Box>
               </Group>
             ))}
           </Stack>
         </Card>
 
         {/* Performance Metrics */}
-        <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} gap="lg">
-          <Card padding="lg" radius="md" withBorder>
-            <Group justify="space-between" mb="md">
+        <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing={isMobile ? "xs" : "md"}>
+          <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+            <Group justify="space-between" mb="md" wrap="nowrap">
               <Text fw={500}>عملکرد سیستم</Text>
-              <Badge color="green">عالی</Badge>
+              <Badge color="green" size={isMobile ? "sm" : "md"}>عالی</Badge>
             </Group>
             <RingProgress
-              size={80}
+              size={isMobile ? 60 : 80}
               thickness={8}
               sections={[{ value: 85, color: 'green' }]}
               label={
@@ -271,25 +297,25 @@ export function DashboardPage() {
             />
           </Card>
 
-          <Card padding="lg" radius="md" withBorder>
-            <Group justify="space-between" mb="md">
+          <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+            <Group justify="space-between" mb="md" wrap="nowrap">
               <Text fw={500}>بازدید روزانه</Text>
-              <Badge color="blue">۲,۴۵۶</Badge>
+              <Badge color="blue" size={isMobile ? "md" : "lg"}>۲,۴۵۶</Badge>
             </Group>
-            <Progress value={75} color="blue" size="lg" />
+            <Progress value={75} color="blue" size={isMobile ? "md" : "lg"} />
             <Text size="sm" c="dimmed" mt="xs">+۱۲٪ از دیروز</Text>
           </Card>
 
-          <Card padding="lg" radius="md" withBorder>
-            <Group justify="space-between" mb="md">
+          <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+            <Group justify="space-between" mb="md" wrap="nowrap">
               <Text fw={500}>رضایت مشتریان</Text>
-              <Badge color="yellow">۴.۸/۵</Badge>
+              <Badge color="yellow" size={isMobile ? "sm" : "md"}>۴.۸/۵</Badge>
             </Group>
             <Group gap="xs" justify="center">
               {[1, 2, 3, 4, 5].map((star) => (
                 <IconStar
                   key={star}
-                  size={20}
+                  size={isMobile ? 16 : 20}
                   fill={star <= 4 ? '#ffd700' : 'none'}
                   color="#ffd700"
                 />

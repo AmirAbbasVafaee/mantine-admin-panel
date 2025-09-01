@@ -32,6 +32,7 @@ import {
   IconChevronDown,
 } from '@tabler/icons-react'
 import { useResponsive } from '@/hooks/useResponsive'
+import { useTheme } from '@/contexts/ThemeContext'
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -39,11 +40,11 @@ interface DashboardLayoutProps {
 }
 
 export function DashboardLayout({ children, activePage }: DashboardLayoutProps) {
-  const [isDark, setIsDark] = useState(false)
   const [opened, setOpened] = useState(false)
   const { isMobile, isTablet } = useResponsive()
   const theme = useMantineTheme()
   const router = useRouter()
+  const { isDark, toggleTheme } = useTheme()
 
   const user = {
     name: 'احمد محمدی',
@@ -83,7 +84,7 @@ export function DashboardLayout({ children, activePage }: DashboardLayoutProps) 
         borderRadius: '8px',
         marginBottom: '4px',
         backgroundColor: activePage === link.id ? 'var(--mantine-color-blue-1)' : 'transparent',
-        color: activePage === link.id ? 'var(--mantine-color-blue-6)' : '#495057',
+        color: activePage === link.id ? 'var(--mantine-color-blue-6)' : isDark ? '#ffffff' : '#495057',
         fontWeight: activePage === link.id ? 600 : 400,
         transition: 'all 0.2s',
         cursor: 'pointer',
@@ -105,7 +106,7 @@ export function DashboardLayout({ children, activePage }: DashboardLayoutProps) 
         borderRadius: '8px',
         marginBottom: '4px',
         transition: 'all 0.2s',
-        color: '#495057',
+        color: isDark ? '#ffffff' : '#495057',
         cursor: 'pointer',
       }}
     >
@@ -131,55 +132,76 @@ export function DashboardLayout({ children, activePage }: DashboardLayoutProps) 
           borderBottom: `1px solid ${isDark ? '#373a40' : '#e9ecef'}`,
         }}
       >
-        <Group h="100%" px="md" justify="space-between">
-          <Group>
-            <Burger
-              opened={opened}
-              onClick={() => setOpened(!opened)}
-              hiddenFrom="sm"
-              size="sm"
-            />
-            <Text size="lg" fw={700} c={isDark ? '#ffffff' : '#000000'}>
+        <Group h="100%" px="md" justify="space-between" wrap="nowrap">
+          <Group wrap="nowrap">
+            {(isMobile || isTablet) && (
+              <Burger
+                opened={opened}
+                onClick={() => setOpened(!opened)}
+                size="sm"
+                color={isDark ? '#ffffff' : '#000000'}
+              />
+            )}
+            <Text size="lg" fw={700} c={isDark ? '#ffffff' : '#000000'} style={{ minWidth: 'fit-content' }}>
               پنل مدیریت
             </Text>
           </Group>
 
-          <Group gap="sm">
-            <TextInput
-              placeholder="جستجو..."
-              leftSection={<IconSearch size={16} />}
-              size="sm"
-              style={{ width: 200 }}
-            />
+          <Group gap="xs" wrap="nowrap" style={{ flex: 1, justifyContent: 'flex-end' }}>
+            {!isMobile && (
+              <TextInput
+                placeholder="جستجو..."
+                leftSection={<IconSearch size={16} />}
+                size="sm"
+                style={{ width: 200, minWidth: 'fit-content' }}
+                styles={{
+                  input: {
+                    backgroundColor: isDark ? '#25262b' : '#ffffff',
+                    borderColor: isDark ? '#373a40' : '#ced4da',
+                    color: isDark ? '#ffffff' : '#000000',
+                  }
+                }}
+              />
+            )}
             
             <ActionIcon
               variant="light"
               size="lg"
-              onClick={() => setIsDark(!isDark)}
+              onClick={toggleTheme}
+              color={isDark ? 'yellow' : 'blue'}
             >
               {isDark ? <IconSun size={20} /> : <IconMoon size={20} />}
             </ActionIcon>
 
-            <ActionIcon variant="light" size="lg">
+            {/* Theme Debug Info */}
+            <Text size="xs" c="dimmed" style={{ fontSize: '10px' }}>
+              Theme: {isDark ? 'Dark' : 'Light'}
+            </Text>
+
+            <ActionIcon variant="light" size="lg" color={isDark ? 'gray' : 'blue'}>
               <IconBell size={20} />
             </ActionIcon>
 
             <Menu>
               <Menu.Target>
                 <UnstyledButton>
-                  <Group gap="sm">
+                  <Group gap="sm" wrap="nowrap">
                     <Avatar size="md" radius="xl">
                       {user.name.charAt(0)}
                     </Avatar>
-                    <Box style={{ flex: 1 }}>
-                      <Text size="sm" fw={500}>
-                        {user.name}
-                      </Text>
-                      <Text c="dimmed" size="xs">
-                        {user.email}
-                      </Text>
-                    </Box>
-                    <IconChevronDown size={16} />
+                    {!isMobile && (
+                      <Box style={{ flex: 1, minWidth: 0 }}>
+                        <Text size="sm" fw={500} style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          {user.name}
+                        </Text>
+                        <Text c="dimmed" size="xs" style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                          {user.email}
+                        </Text>
+                      </Box>
+                    )}
+                    {!isMobile && (
+                      <IconChevronDown size={16} />
+                    )}
                   </Group>
                 </UnstyledButton>
               </Menu.Target>

@@ -1,16 +1,32 @@
 "use client"
 
 import { useState } from 'react'
-import { Stack, Card, Pagination, Alert } from '@mantine/core'
-import { IconAlertCircle } from '@tabler/icons-react'
-import { Order, OrderFormData } from '@/types/order'
-import { useOrders } from '@/hooks/useOrders'
+import { Container, Title, Text, Group, Button, Stack, Box } from '@mantine/core'
+import { IconPlus } from '@tabler/icons-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SearchAndFilter } from '@/components/common/SearchAndFilter'
 import { OrdersTable } from '@/components/tables/OrdersTable'
 import { OrderModal } from '@/components/modals/OrderModal'
+import { useOrders } from '@/hooks/useOrders'
+import { Order, OrderFormData } from '@/types/order'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export function OrdersPage() {
+  const { isDark } = useTheme()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [modalMode, setModalMode] = useState<'add' | 'edit' | 'view' | 'delete'>('add')
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
+  const [formData, setFormData] = useState<OrderFormData>({
+    customer: '',
+    email: '',
+    products: '',
+    amount: '',
+    status: 'pending',
+    paymentMethod: 'cash',
+    shippingAddress: ''
+  })
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
+  
   const {
     orders,
     loading,
@@ -22,28 +38,6 @@ export function OrdersPage() {
     validateForm
   } = useOrders()
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
-  const [modalMode, setModalMode] = useState<'add' | 'edit' | 'view' | 'delete'>('add')
-  const [modalOpened, setModalOpened] = useState(false)
-  const [formData, setFormData] = useState<OrderFormData>({
-    customer: '',
-    email: '',
-    products: '',
-    amount: '',
-    status: 'pending',
-    paymentMethod: 'online',
-    shippingAddress: ''
-  })
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
-
-  const itemsPerPage = 10
-  const totalPages = Math.ceil(orders.length / itemsPerPage)
-  const paginatedOrders = orders.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  )
-
   const handleAddOrder = () => {
     setFormData({
       customer: '',
@@ -51,12 +45,13 @@ export function OrdersPage() {
       products: '',
       amount: '',
       status: 'pending',
-      paymentMethod: 'online',
+      paymentMethod: 'cash',
       shippingAddress: ''
     })
     setFormErrors({})
     setModalMode('add')
-    setModalOpened(true)
+    setSelectedOrder(null)
+    setIsModalOpen(true)
   }
 
   const handleEditOrder = (order: Order) => {
@@ -70,24 +65,30 @@ export function OrdersPage() {
       shippingAddress: order.shippingAddress
     })
     setFormErrors({})
-    setSelectedOrder(order)
     setModalMode('edit')
-    setModalOpened(true)
+    setSelectedOrder(order)
+    setIsModalOpen(true)
   }
 
   const handleViewOrder = (order: Order) => {
-    setSelectedOrder(order)
     setModalMode('view')
-    setModalOpened(true)
+    setSelectedOrder(order)
+    setIsModalOpen(true)
   }
 
   const handleDeleteOrder = (order: Order) => {
-    setSelectedOrder(order)
     setModalMode('delete')
-    setModalOpened(true)
+    setSelectedOrder(order)
+    setIsModalOpen(true)
   }
 
-  const handleSubmit = async () => {
+  const handleModalClose = () => {
+    setIsModalOpen(false)
+    setSelectedOrder(null)
+    setFormErrors({})
+  }
+
+  const handleFormSubmit = async () => {
     const errors = validateForm(formData)
     setFormErrors(errors)
 
@@ -95,124 +96,86 @@ export function OrdersPage() {
       return
     }
 
-    let result
     if (modalMode === 'add') {
-      result = await addOrder(formData)
+      await addOrder(formData)
     } else if (modalMode === 'edit' && selectedOrder) {
-      result = await updateOrder(selectedOrder.id, formData)
+      await updateOrder(selectedOrder.id, formData)
     }
-
-    if (result?.success) {
-      setModalOpened(false)
-      setFormErrors({})
-    }
+    handleModalClose()
   }
 
-  const handleConfirmDelete = async () => {
+  const handleDeleteConfirm = async () => {
     if (selectedOrder) {
-      const result = await deleteOrder(selectedOrder.id)
-      if (result?.success) {
-        setModalOpened(false)
-      }
+      await deleteOrder(selectedOrder.id)
+      handleModalClose()
     }
   }
-
-  const handleResetFilters = () => {
-    setFilters({
-      searchQuery: '',
-      statusFilter: null,
-      dateFilter: null
-    })
-  }
-
-  const filterOptions = [
-    {
-      key: 'status',
-      label: 'وضعیت',
-      value: filters.statusFilter,
-      onChange: (value: string | null) => setFilters(prev => ({ ...prev, statusFilter: value })),
-      data: [
-        { value: 'pending', label: 'در انتظار' },
-        { value: 'processing', label: 'در حال پردازش' },
-        { value: 'shipped', label: 'ارسال شده' },
-        { value: 'completed', label: 'تکمیل شده' },
-        { value: 'cancelled', label: 'لغو شده' }
-      ]
-    },
-    {
-      key: 'date',
-      label: 'تاریخ',
-      value: filters.dateFilter,
-      onChange: (value: string | null) => setFilters(prev => ({ ...prev, dateFilter: value })),
-      data: [
-        { value: '۱۴۰۲/۱۲/۱۵', label: '۱۴۰۲/۱۲/۱۵' },
-        { value: '۱۴۰۲/۱۲/۱۴', label: '۱۴۰۲/۱۲/۱۴' },
-        { value: '۱۴۰۲/۱۲/۱۳', label: '۱۴۰۲/۱۲/۱۳' },
-        { value: '۱۴۰۲/۱۲/۱۲', label: '۱۴۰۲/۱۲/۱۲' },
-        { value: '۱۴۰۲/۱۲/۱۱', label: '۱۴۰۲/۱۲/۱۱' }
-      ]
-    }
-  ]
 
   return (
-    <Stack gap="lg">
-      <PageHeader
-        title="مدیریت سفارشات"
-        description="مدیریت و پیگیری سفارشات مشتریان"
-        actionLabel="افزودن سفارش"
-        onAction={handleAddOrder}
-      />
+    <Container size="xl" py="md" px={isDark ? "xs" : "md"}>
+      <Stack gap="lg">
+        <PageHeader
+          title="مدیریت سفارشات"
+          description="مدیریت سفارشات مشتریان و پیگیری وضعیت ارسال"
+          actionLabel="افزودن سفارش جدید"
+          onAction={handleAddOrder}
+        />
 
-      <SearchAndFilter
-        searchQuery={filters.searchQuery}
-        onSearchChange={(value) => setFilters(prev => ({ ...prev, searchQuery: value }))}
-        filters={filterOptions}
-        onReset={handleResetFilters}
-        searchPlaceholder="جستجو در شماره سفارش، نام مشتری یا ایمیل..."
-      />
+        <SearchAndFilter
+          searchQuery={filters.searchQuery}
+          onSearchChange={(value) => setFilters(prev => ({ ...prev, searchQuery: value }))}
+          filters={[
+            {
+              key: 'status',
+              label: 'وضعیت',
+              value: filters.statusFilter,
+              onChange: (value: string | null) => setFilters(prev => ({ ...prev, statusFilter: value })),
+              data: [
+                { value: 'pending', label: 'در انتظار' },
+                { value: 'processing', label: 'در حال پردازش' },
+                { value: 'shipped', label: 'ارسال شده' },
+                { value: 'completed', label: 'تکمیل شده' },
+                { value: 'cancelled', label: 'لغو شده' }
+              ]
+            },
+            {
+              key: 'date',
+              label: 'تاریخ',
+              value: filters.dateFilter,
+              onChange: (value: string | null) => setFilters(prev => ({ ...prev, dateFilter: value })),
+              data: [
+                { value: '۱۴۰۲/۱۲/۱۵', label: '۱۴۰۲/۱۲/۱۵' },
+                { value: '۱۴۰۲/۱۲/۱۴', label: '۱۴۰۲/۱۲/۱۴' },
+                { value: '۱۴۰۲/۱۲/۱۳', label: '۱۴۰۲/۱۲/۱۳' },
+                { value: '۱۴۰۲/۱۲/۱۲', label: '۱۴۰۲/۱۲/۱۲' },
+                { value: '۱۴۰۲/۱۲/۱۱', label: '۱۴۰۲/۱۲/۱۱' }
+              ]
+            }
+          ]}
+          onReset={() => setFilters({ searchQuery: '', statusFilter: null, dateFilter: null })}
+          searchPlaceholder="جستجو در سفارشات..."
+        />
 
-      {orders.length === 0 ? (
-        <Alert
-          icon={<IconAlertCircle size={16} />}
-          title="هیچ سفارشی یافت نشد"
-          color="blue"
-        >
-          سفارشی با فیلترهای انتخاب شده یافت نشد. لطفاً فیلترها را تغییر دهید یا سفارش جدیدی اضافه کنید.
-        </Alert>
-      ) : (
-        <Card padding="lg" radius="md" withBorder>
-          <OrdersTable
-            orders={paginatedOrders}
-            onView={handleViewOrder}
-            onEdit={handleEditOrder}
-            onDelete={handleDeleteOrder}
-          />
-          
-          {totalPages > 1 && (
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
-              <Pagination
-                total={totalPages}
-                value={currentPage}
-                onChange={setCurrentPage}
-                withEdges
-              />
-            </div>
-          )}
-        </Card>
-      )}
+        <OrdersTable
+          orders={orders}
+          onEdit={handleEditOrder}
+          onView={handleViewOrder}
+          onDelete={handleDeleteOrder}
+        />
 
-      <OrderModal
-        opened={modalOpened}
-        onClose={() => setModalOpened(false)}
-        order={selectedOrder}
-        formData={formData}
-        onFormChange={setFormData}
-        onSubmit={handleSubmit}
-        onDelete={handleConfirmDelete}
-        loading={loading}
-        errors={formErrors}
-        mode={modalMode}
-      />
-    </Stack>
+        <OrderModal
+          opened={isModalOpen}
+          onClose={handleModalClose}
+          mode={modalMode}
+          order={selectedOrder}
+          formData={formData}
+          onFormChange={setFormData}
+          onSubmit={handleFormSubmit}
+          onDelete={handleDeleteConfirm}
+          loading={loading}
+          errors={formErrors}
+        />
+      </Stack>
+    </Container>
   )
 }

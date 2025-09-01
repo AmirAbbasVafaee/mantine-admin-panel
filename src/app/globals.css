@@ -13,6 +13,40 @@ body {
   font-family: 'Vazir', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* Dark mode CSS variables */
+[data-mantine-color-scheme="dark"] {
+  --mantine-color-body: #1a1b1e;
+  --mantine-color-text: #ffffff;
+  --mantine-color-dimmed: #adb5bd;
+  --mantine-color-gray-0: #25262b;
+  --mantine-color-gray-1: #2c2e33;
+  --mantine-color-gray-2: #343a40;
+  --mantine-color-gray-3: #373a40;
+  --mantine-color-gray-4: #495057;
+  --mantine-color-gray-5: #6c757d;
+  --mantine-color-gray-6: #adb5bd;
+  --mantine-color-gray-7: #ced4da;
+  --mantine-color-gray-8: #dee2e6;
+  --mantine-color-gray-9: #e9ecef;
+}
+
+/* Light mode CSS variables */
+[data-mantine-color-scheme="light"] {
+  --mantine-color-body: #ffffff;
+  --mantine-color-text: #000000;
+  --mantine-color-dimmed: #6c757d;
+  --mantine-color-gray-0: #f8f9fa;
+  --mantine-color-gray-1: #e9ecef;
+  --mantine-color-gray-2: #dee2e6;
+  --mantine-color-gray-3: #ced4da;
+  --mantine-color-gray-4: #adb5bd;
+  --mantine-color-gray-5: #6c757d;
+  --mantine-color-gray-6: #495057;
+  --mantine-color-gray-7: #343a40;
+  --mantine-color-gray-8: #212529;
+  --mantine-color-gray-9: #000000;
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
