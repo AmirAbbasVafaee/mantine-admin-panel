@@ -4,6 +4,7 @@ import * as React from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { ThemeToggle } from "@/components/theme-toggle"
 import { 
   LayoutDashboard, 
   Users, 
@@ -70,10 +71,10 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
       
       {/* Sidebar */}
       <Card className={`
-        fixed top-0 left-0 h-full w-64 bg-card border-0 shadow-lg z-50
+        fixed top-0 right-0 h-screen w-64 bg-card border-0 shadow-lg z-50
         transform transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-        lg:relative lg:translate-x-0 lg:z-auto
+        ${isOpen ? 'translate-x-0' : 'translate-x-full'}
+        lg:fixed lg:translate-x-0 lg:z-auto
       `}>
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -87,14 +88,17 @@ export function Sidebar({ isOpen, onToggle }: SidebarProps) {
                 <p className="text-sm text-muted-foreground">مدیریت سیستم</p>
               </div>
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onToggle}
-              className="lg:hidden"
-            >
-              <X className="w-4 h-4" />
-            </Button>
+            <div className="flex items-center space-x-2 space-x-reverse">
+              <ThemeToggle />
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onToggle}
+                className="lg:hidden"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
 
           {/* Navigation */}
