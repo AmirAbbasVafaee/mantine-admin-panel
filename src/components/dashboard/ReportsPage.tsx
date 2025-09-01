@@ -16,15 +16,11 @@ import {
   ThemeIcon,
 } from '@mantine/core'
 import {
-  IconTrendingUp,
   IconUsers,
-  IconShoppingCart,
   IconCurrencyDollar,
   IconPackage,
-  IconChartBar,
   IconActivity,
-  IconArrowUpRight,
-  IconArrowDownRight
+  IconArrowUpRight
 } from '@tabler/icons-react'
 
 export function ReportsPage() {

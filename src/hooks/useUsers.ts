@@ -39,7 +39,7 @@ export function useUsers() {
       
       setUsers(prev => [...prev, newUser])
       return { success: true }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'خطا در افزودن کاربر' }
     } finally {
       setLoading(false)
@@ -58,7 +58,7 @@ export function useUsers() {
           : user
       ))
       return { success: true }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'خطا در بروزرسانی کاربر' }
     } finally {
       setLoading(false)
@@ -73,7 +73,7 @@ export function useUsers() {
       
       setUsers(prev => prev.filter(user => user.id !== id))
       return { success: true }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'خطا در حذف کاربر' }
     } finally {
       setLoading(false)

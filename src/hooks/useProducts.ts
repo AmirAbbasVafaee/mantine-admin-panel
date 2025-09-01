@@ -45,7 +45,7 @@ export function useProducts() {
       
       setProducts(prev => [...prev, newProduct])
       return { success: true }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'خطا در افزودن محصول' }
     } finally {
       setLoading(false)
@@ -73,7 +73,7 @@ export function useProducts() {
           : product
       ))
       return { success: true }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'خطا در بروزرسانی محصول' }
     } finally {
       setLoading(false)
@@ -88,7 +88,7 @@ export function useProducts() {
       
       setProducts(prev => prev.filter(product => product.id !== id))
       return { success: true }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'خطا در حذف محصول' }
     } finally {
       setLoading(false)

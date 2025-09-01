@@ -64,7 +64,7 @@ export function OrderModal({
             title="تایید حذف"
             color="red"
           >
-            آیا از حذف سفارش "{order?.id}" اطمینان دارید؟ این عملیات قابل بازگشت نیست.
+            آیا از حذف سفارش &quot;{order?.id}&quot; اطمینان دارید؟ این عملیات قابل بازگشت نیست.
           </Alert>
           
           <Stack gap="sm">

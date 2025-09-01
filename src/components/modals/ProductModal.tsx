@@ -64,7 +64,7 @@ export function ProductModal({
             title="تایید حذف"
             color="red"
           >
-            آیا از حذف محصول "{product?.name}" اطمینان دارید؟ این عملیات قابل بازگشت نیست.
+            آیا از حذف محصول &quot;{product?.name}&quot; اطمینان دارید؟ این عملیات قابل بازگشت نیست.
           </Alert>
           
           <Stack gap="sm">

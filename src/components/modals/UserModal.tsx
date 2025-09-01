@@ -64,7 +64,7 @@ export function UserModal({
             title="تایید حذف"
             color="red"
           >
-            آیا از حذف کاربر "{user?.name}" اطمینان دارید؟ این عملیات قابل بازگشت نیست.
+            آیا از حذف کاربر &quot;{user?.name}&quot; اطمینان دارید؟ این عملیات قابل بازگشت نیست.
           </Alert>
           
           <Stack gap="sm">

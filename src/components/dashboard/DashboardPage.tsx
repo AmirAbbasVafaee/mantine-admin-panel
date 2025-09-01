@@ -16,20 +16,18 @@ import {
   ThemeIcon,
 } from '@mantine/core'
 import {
-  IconTrendingUp,
   IconUsers,
   IconShoppingCart,
   IconCurrencyDollar,
   IconPackage,
   IconStar,
   IconActivity,
-  IconArrowUpRight,
-  IconArrowDownRight
+  IconArrowUpRight
 } from '@tabler/icons-react'
 import { useResponsive } from '@/hooks/useResponsive'
 
 export function DashboardPage() {
-  const { isMobile, isTablet } = useResponsive()
+  const { isMobile } = useResponsive()
   
   // Mock dashboard data
   const dashboardData = {

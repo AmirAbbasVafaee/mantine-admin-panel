@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { Container, Title, Text, Group, Button, Stack, Box } from '@mantine/core'
-import { IconPlus } from '@tabler/icons-react'
+import { Container, Stack } from '@mantine/core'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SearchAndFilter } from '@/components/common/SearchAndFilter'
 import { UsersTable } from '@/components/tables/UsersTable'

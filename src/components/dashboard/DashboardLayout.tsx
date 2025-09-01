@@ -13,7 +13,6 @@ import {
   Stack,
   Box,
   Burger,
-  useMantineTheme,
   TextInput,
 } from '@mantine/core'
 import {
@@ -42,7 +41,7 @@ interface DashboardLayoutProps {
 export function DashboardLayout({ children, activePage }: DashboardLayoutProps) {
   const [opened, setOpened] = useState(false)
   const { isMobile, isTablet } = useResponsive()
-  const theme = useMantineTheme()
+
   const router = useRouter()
   const { isDark, toggleTheme } = useTheme()
 

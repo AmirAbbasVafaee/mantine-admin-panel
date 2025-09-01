@@ -27,7 +27,7 @@ import {
   IconShield, 
   IconSettings, 
   IconDeviceFloppy,
-  IconLock,
+
   IconAlertCircle,
   IconDatabase
 } from '@tabler/icons-react'

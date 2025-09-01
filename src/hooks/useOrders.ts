@@ -43,7 +43,7 @@ export function useOrders() {
       
       setOrders(prev => [...prev, newOrder])
       return { success: true }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'خطا در افزودن سفارش' }
     } finally {
       setLoading(false)
@@ -71,7 +71,7 @@ export function useOrders() {
           : order
       ))
       return { success: true }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'خطا در بروزرسانی سفارش' }
     } finally {
       setLoading(false)
@@ -86,7 +86,7 @@ export function useOrders() {
       
       setOrders(prev => prev.filter(order => order.id !== id))
       return { success: true }
-    } catch (error) {
+    } catch {
       return { success: false, error: 'خطا در حذف سفارش' }
     } finally {
       setLoading(false)
