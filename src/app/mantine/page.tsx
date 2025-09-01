@@ -1,5 +1,5 @@
-import MantineDashboard from '../mantine-dashboard'
+import { redirect } from 'next/navigation'
 
 export default function MantinePage() {
-  return <MantineDashboard />
+  redirect('/mantine/dashboard')
 }
