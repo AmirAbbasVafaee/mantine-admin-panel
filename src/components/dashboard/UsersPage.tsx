@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from 'react'
-import { Container, Stack } from '@mantine/core'
+import { Container, Stack, Card, Alert } from '@mantine/core'
+import { IconAlertCircle } from '@tabler/icons-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SearchAndFilter } from '@/components/common/SearchAndFilter'
 import { UsersTable } from '@/components/tables/UsersTable'
@@ -145,12 +146,24 @@ export function UsersPage() {
           searchPlaceholder="جستجو در کاربران..."
         />
 
-        <UsersTable
-          users={users}
-          onEdit={handleEditUser}
-          onView={handleViewUser}
-          onDelete={handleDeleteUser}
-        />
+        {users.length === 0 ? (
+          <Alert
+            icon={<IconAlertCircle size={16} />}
+            title="هیچ کاربری یافت نشد"
+            color="blue"
+          >
+            کاربری با فیلترهای انتخاب شده یافت نشد. لطفاً فیلترها را تغییر دهید یا کاربر جدیدی اضافه کنید.
+          </Alert>
+        ) : (
+          <Card padding="lg" radius="md" withBorder>
+            <UsersTable
+              users={users}
+              onEdit={handleEditUser}
+              onView={handleViewUser}
+              onDelete={handleDeleteUser}
+            />
+          </Card>
+        )}
 
         <UserModal
           opened={isModalOpen}

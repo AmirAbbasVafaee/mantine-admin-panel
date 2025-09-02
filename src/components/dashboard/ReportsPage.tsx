@@ -171,11 +171,16 @@ export function ReportsPage() {
         <Grid gutter="lg">
           {/* Sales by Category */}
           <Grid.Col span={{ base: 12, lg: 6 }}>
-            <Card padding="lg" radius="md" withBorder>
+            <Card 
+              padding="lg" 
+              radius="md" 
+              withBorder
+              style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+            >
               <Title order={3} mb="lg">
                 فروش بر اساس دسته‌بندی
               </Title>
-              <Stack gap="md">
+              <Stack gap="md" style={{ flex: 1 }}>
                 {topCategories.map((item) => (
                   <div key={item.category}>
                     <Group justify="space-between" mb="xs" wrap="nowrap">
@@ -195,11 +200,16 @@ export function ReportsPage() {
 
           {/* Customer Retention */}
           <Grid.Col span={{ base: 12, lg: 6 }}>
-            <Card padding="lg" radius="md" withBorder>
+            <Card 
+              padding="lg" 
+              radius="md" 
+              withBorder
+              style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+            >
               <Title order={3} mb="lg">
                 نگهداری مشتریان
               </Title>
-              <Stack gap="lg">
+              <Stack gap="lg" style={{ flex: 1 }}>
                 <Group justify="space-between">
                   <Text>مشتریان جدید</Text>
                   <Badge color="green" size="lg">{reportsData.customerReport.newCustomers}</Badge>
@@ -228,19 +238,8 @@ export function ReportsPage() {
               <Text fw={500}>عملکرد وب‌سایت</Text>
               <Badge color="green">عالی</Badge>
             </Group>
-            <RingProgress
-              size={80}
-              thickness={8}
-              sections={[{ value: 99.9, color: 'green' }]}
-              label={
-                <Text ta="center" size="xs" fw={700}>
-                  ۹۹.۹٪
-                </Text>
-              }
-            />
-            <Text size="sm" c="dimmed" ta="center" mt="xs">
-              آپ‌تایم
-            </Text>
+            <Progress value={99.9} color="green" size="lg" />
+            <Text size="sm" c="dimmed" mt="xs">آپ‌تایم</Text>
           </Card>
 
           <Card padding="lg" radius="md" withBorder>
@@ -270,9 +269,12 @@ export function ReportsPage() {
           <Grid gutter="md">
             {monthlyData.slice(-6).map((month) => (
               <Grid.Col key={month.month} span={{ base: 6, sm: 4, md: 2 }}>
-                <Card padding="sm" radius="md" withBorder style={{
-                  backgroundColor: 'var(--mantine-color-gray-0)'
-                }}>
+                <Card 
+                  padding="sm" 
+                  radius="md" 
+                  withBorder 
+                  className="dashboard-card"
+                >
                   <Text size="sm" fw={500} ta="center">
                     {month.month}
                   </Text>

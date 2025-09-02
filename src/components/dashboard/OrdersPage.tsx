@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from 'react'
-import { Container, Stack } from '@mantine/core'
+import { Container, Stack, Card, Alert } from '@mantine/core'
+import { IconAlertCircle } from '@tabler/icons-react'
 import { PageHeader } from '@/components/common/PageHeader'
 import { SearchAndFilter } from '@/components/common/SearchAndFilter'
 import { OrdersTable } from '@/components/tables/OrdersTable'
@@ -155,12 +156,24 @@ export function OrdersPage() {
           searchPlaceholder="جستجو در سفارشات..."
         />
 
-        <OrdersTable
-          orders={orders}
-          onEdit={handleEditOrder}
-          onView={handleViewOrder}
-          onDelete={handleDeleteOrder}
-        />
+        {orders.length === 0 ? (
+          <Alert
+            icon={<IconAlertCircle size={16} />}
+            title="هیچ سفارشی یافت نشد"
+            color="blue"
+          >
+            سفارشی با فیلترهای انتخاب شده یافت نشد. لطفاً فیلترها را تغییر دهید یا سفارش جدیدی اضافه کنید.
+          </Alert>
+        ) : (
+          <Card padding="lg" radius="md" withBorder>
+            <OrdersTable
+              orders={orders}
+              onEdit={handleEditOrder}
+              onView={handleViewOrder}
+              onDelete={handleDeleteOrder}
+            />
+          </Card>
+        )}
 
         <OrderModal
           opened={isModalOpen}

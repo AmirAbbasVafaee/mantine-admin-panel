@@ -25,9 +25,11 @@ import {
   IconArrowUpRight
 } from '@tabler/icons-react'
 import { useResponsive } from '@/hooks/useResponsive'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export function DashboardPage() {
   const { isMobile } = useResponsive()
+  const { colorTheme } = useTheme()
   
   // Mock dashboard data
   const dashboardData = {
@@ -190,11 +192,16 @@ export function DashboardPage() {
         <Grid gutter={isMobile ? "xs" : "lg"}>
           {/* Sales by Category */}
           <Grid.Col span={{ base: 12, lg: 6 }}>
-            <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+            <Card 
+              padding={isMobile ? "sm" : "lg"} 
+              radius="md" 
+              withBorder
+              style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+            >
               <Title order={3} mb="lg" style={{ fontSize: isMobile ? '1.2rem' : '1.5rem' }}>
                 فروش بر اساس دسته‌بندی
               </Title>
-              <Stack gap="md">
+              <Stack gap="md" style={{ flex: 1 }}>
                 {dashboardData.salesByCategory.map((item) => (
                   <div key={item.category}>
                     <Group justify="space-between" mb="xs" wrap="nowrap">
@@ -214,14 +221,18 @@ export function DashboardPage() {
 
           {/* Recent Orders */}
           <Grid.Col span={{ base: 12, lg: 6 }}>
-            <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
+            <Card 
+              padding={isMobile ? "sm" : "lg"} 
+              radius="md" 
+              withBorder
+              style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+            >
               <Title order={3} mb="lg" style={{ fontSize: isMobile ? '1.2rem' : '1.5rem' }}>
                 سفارشات اخیر
               </Title>
-              <Stack gap="sm">
+              <Stack gap="sm" style={{ flex: 1 }}>
                 {dashboardData.recentOrders.map((order) => (
-                  <Group key={order.id} justify="space-between" p="xs" style={{ 
-                    border: '1px solid var(--mantine-color-gray-3)',
+                  <Group key={order.id} justify="space-between" p="xs" className="dashboard-card" style={{ 
                     borderRadius: '8px',
                     flexWrap: 'wrap'
                   }}>
@@ -250,14 +261,12 @@ export function DashboardPage() {
           </Title>
           <Stack gap="sm">
             {dashboardData.topProducts.map((product, index) => (
-              <Group key={product.name} justify="space-between" p={isMobile ? "sm" : "md"} style={{
-                border: '1px solid var(--mantine-color-gray-3)',
+              <Group key={product.name} justify="space-between" p={isMobile ? "sm" : "md"} className="dashboard-card" style={{
                 borderRadius: '8px',
-                backgroundColor: index < 3 ? 'var(--mantine-color-gray-0)' : 'transparent',
                 flexWrap: 'wrap'
               }}>
                 <Group gap="md" wrap="nowrap">
-                  <Badge color={index < 3 ? 'blue' : 'gray'} size={isMobile ? "md" : "lg"}>
+                  <Badge color={index < 3 ? colorTheme : 'gray'} size={isMobile ? "md" : "lg"}>
                     #{index + 1}
                   </Badge>
                   <Box style={{ minWidth: 0, flex: 1 }}>
@@ -283,24 +292,16 @@ export function DashboardPage() {
               <Text fw={500}>عملکرد سیستم</Text>
               <Badge color="green" size={isMobile ? "sm" : "md"}>عالی</Badge>
             </Group>
-            <RingProgress
-              size={isMobile ? 60 : 80}
-              thickness={8}
-              sections={[{ value: 85, color: 'green' }]}
-              label={
-                <Text ta="center" size="xs" fw={700}>
-                  ۸۵٪
-                </Text>
-              }
-            />
+            <Progress value={85} color="green" size={isMobile ? "md" : "lg"} />
+            <Text size="sm" c="dimmed" mt="xs">آپ‌تایم سیستم</Text>
           </Card>
 
           <Card padding={isMobile ? "sm" : "lg"} radius="md" withBorder>
             <Group justify="space-between" mb="md" wrap="nowrap">
               <Text fw={500}>بازدید روزانه</Text>
-              <Badge color="blue" size={isMobile ? "md" : "lg"}>۲,۴۵۶</Badge>
+              <Badge color={colorTheme} size={isMobile ? "sm" : "md"}>۲,۴۵۶</Badge>
             </Group>
-            <Progress value={75} color="blue" size={isMobile ? "md" : "lg"} />
+            <Progress value={75} color={colorTheme} size={isMobile ? "md" : "lg"} />
             <Text size="sm" c="dimmed" mt="xs">+۱۲٪ از دیروز</Text>
           </Card>
 
@@ -309,19 +310,8 @@ export function DashboardPage() {
               <Text fw={500}>رضایت مشتریان</Text>
               <Badge color="yellow" size={isMobile ? "sm" : "md"}>۴.۸/۵</Badge>
             </Group>
-            <Group gap="xs" justify="center">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <IconStar
-                  key={star}
-                  size={isMobile ? 16 : 20}
-                  fill={star <= 4 ? '#ffd700' : 'none'}
-                  color="#ffd700"
-                />
-              ))}
-            </Group>
-            <Text size="sm" c="dimmed" ta="center" mt="xs">
-              بر اساس ۲۳۴ نظر
-            </Text>
+            <Progress value={96} color="yellow" size={isMobile ? "md" : "lg"} />
+            <Text size="sm" c="dimmed" mt="xs">بر اساس ۲۳۴ نظر</Text>
           </Card>
         </SimpleGrid>
       </Stack>

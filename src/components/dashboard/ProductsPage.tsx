@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { Stack, Card, Pagination, Alert, Container } from '@mantine/core'
+import { Stack, Card, Alert, Container } from '@mantine/core'
 import { IconAlertCircle } from '@tabler/icons-react'
 import { Product, ProductFormData } from '@/types/product'
 import { useProducts } from '@/hooks/useProducts'
@@ -24,7 +24,6 @@ export function ProductsPage() {
     validateForm
   } = useProducts()
 
-  const [currentPage, setCurrentPage] = useState(1)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [modalMode, setModalMode] = useState<'add' | 'edit' | 'view' | 'delete'>('add')
   const [modalOpened, setModalOpened] = useState(false)
@@ -38,13 +37,6 @@ export function ProductsPage() {
     sku: ''
   })
   const [formErrors, setFormErrors] = useState<Record<string, string>>({})
-
-  const itemsPerPage = 10
-  const totalPages = Math.ceil(products.length / itemsPerPage)
-  const paginatedProducts = products.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  )
 
   const handleAddProduct = () => {
     setFormData({
@@ -184,22 +176,11 @@ export function ProductsPage() {
         ) : (
           <Card padding="lg" radius="md" withBorder>
             <ProductsTable
-              products={paginatedProducts}
+              products={products}
               onView={handleViewProduct}
               onEdit={handleEditProduct}
               onDelete={handleDeleteProduct}
             />
-            
-            {totalPages > 1 && (
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
-                <Pagination
-                  total={totalPages}
-                  value={currentPage}
-                  onChange={setCurrentPage}
-                  withEdges
-                />
-              </div>
-            )}
           </Card>
         )}
 

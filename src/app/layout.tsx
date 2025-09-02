@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { MantineAppProvider } from "@/components/mantine-provider"
+import { ThemeWrapper } from "@/components/ThemeWrapper"
 
 export const metadata: Metadata = {
   title: "داشبورد مدیریتی - Next.js + Mantine",
@@ -16,7 +17,9 @@ export default function RootLayout({
     <html lang="fa" dir="rtl" suppressHydrationWarning>
       <body suppressHydrationWarning={true}>
         <MantineAppProvider>
-          {children}
+          <ThemeWrapper>
+            {children}
+          </ThemeWrapper>
         </MantineAppProvider>
       </body>
     </html>
