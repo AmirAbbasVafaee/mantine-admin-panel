@@ -19,7 +19,7 @@ A beautiful Persian font for web applications, hosted on JSDelivr CDN for easy i
 ### Basic Usage
 ```css
 body {
-  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  font-family: 'IranYekan', sans-serif;
   direction: rtl;
   text-align: right;
 }
