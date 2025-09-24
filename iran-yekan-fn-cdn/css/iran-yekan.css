@@ -1,0 +1,634 @@
+/* ===== IRAN YEKAN FONT CSS ===== */
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('https://raw.githubusercontent.com/AmirAbbasVafaee/iran-yekan-fn-cdn/main/fonts/IRANYekanWebRegular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('https://raw.githubusercontent.com/AmirAbbasVafaee/iran-yekan-fn-cdn/main/fonts/IRANYekanWebBold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('https://raw.githubusercontent.com/AmirAbbasVafaee/iran-yekan-fn-cdn/main/fonts/IRANYekanWebLight.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('https://raw.githubusercontent.com/AmirAbbasVafaee/iran-yekan-fn-cdn/main/fonts/IRANYekanWebMedium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('https://raw.githubusercontent.com/AmirAbbasVafaee/iran-yekan-fn-cdn/main/fonts/IRANYekanWebThin.woff2') format('woff2');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('https://raw.githubusercontent.com/AmirAbbasVafaee/iran-yekan-fn-cdn/main/fonts/IRANYekanWebExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('https://raw.githubusercontent.com/AmirAbbasVafaee/iran-yekan-fn-cdn/main/fonts/IRANYekanWebBlack.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url('https://raw.githubusercontent.com/AmirAbbasVafaee/iran-yekan-fn-cdn/main/fonts/IRANYekanWebExtraBlack.woff2') format('woff2');
+  font-weight: 950;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+
+/* ===== IRAN YEKAN TYPOGRAPHY CLASSES ===== */
+
+/* Basic Typography */
+.iran-yekan-text {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+.iran-yekan-heading {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+  font-weight: bold;
+  line-height: 1.6;
+}
+
+.iran-yekan-body {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.8;
+  font-size: 14px;
+}
+
+.iran-yekan-light {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  font-weight: 300;
+  direction: rtl;
+  text-align: right;
+}
+
+.iran-yekan-medium {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  font-weight: 500;
+  direction: rtl;
+  text-align: right;
+}
+
+.iran-yekan-bold {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  font-weight: bold;
+  direction: rtl;
+  text-align: right;
+}
+
+.iran-yekan-thin {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  font-weight: 100;
+  direction: rtl;
+  text-align: right;
+}
+
+.iran-yekan-extra-bold {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  font-weight: 800;
+  direction: rtl;
+  text-align: right;
+}
+
+.iran-yekan-black {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  font-weight: 900;
+  direction: rtl;
+  text-align: right;
+}
+
+.iran-yekan-extra-black {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  font-weight: 950;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Form Elements */
+.iran-yekan-input {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+.iran-yekan-button {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-label {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Table Styling */
+.iran-yekan-table {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-table th,
+.iran-yekan-table td {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Navigation */
+.iran-yekan-nav {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Cards and Modals */
+.iran-yekan-card {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-modal {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-modal .mantine-Modal-title {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Search and Filter */
+.iran-yekan-search {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-search input {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Pagination */
+.iran-yekan-pagination {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Badge and Status */
+.iran-yekan-badge {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Date and Time */
+.iran-yekan-datetime {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Numbers and Currency */
+.iran-yekan-numbers {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+.iran-yekan-currency {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Lists */
+.iran-yekan-list {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-list li {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Messages */
+.iran-yekan-error {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+  color: #e03131;
+}
+
+.iran-yekan-success {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+  color: #2f9e44;
+}
+
+.iran-yekan-warning {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+  color: #fab005;
+}
+
+.iran-yekan-info {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+  color: #1971c2;
+}
+
+/* Tooltip */
+.iran-yekan-tooltip {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Dropdown */
+.iran-yekan-dropdown {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-dropdown .mantine-Select-item {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Checkbox and Radio */
+.iran-yekan-checkbox,
+.iran-yekan-radio {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-checkbox label,
+.iran-yekan-radio label {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Progress Bar */
+.iran-yekan-progress {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Breadcrumb */
+.iran-yekan-breadcrumb {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-breadcrumb .mantine-Breadcrumbs-separator {
+  direction: rtl;
+}
+
+/* Tabs */
+.iran-yekan-tabs {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-tabs .mantine-Tabs-tab {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Accordion */
+.iran-yekan-accordion {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-accordion .mantine-Accordion-control {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Timeline */
+.iran-yekan-timeline {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-timeline .mantine-Timeline-itemContent {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Stepper */
+.iran-yekan-stepper {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-stepper .mantine-Stepper-stepDescription {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Notification */
+.iran-yekan-notification {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-notification .mantine-Notification-title {
+  text-align: right;
+  direction: rtl;
+}
+
+.iran-yekan-notification .mantine-Notification-body {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Alert */
+.iran-yekan-alert {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-alert .mantine-Alert-title {
+  text-align: right;
+  direction: rtl;
+}
+
+.iran-yekan-alert .mantine-Alert-message {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Skeleton */
+.iran-yekan-skeleton {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Loading */
+.iran-yekan-loading {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Empty State */
+.iran-yekan-empty {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-empty .mantine-EmptyState-description {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Spotlight */
+.iran-yekan-spotlight {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-spotlight .mantine-Spotlight-action {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Command */
+.iran-yekan-command {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-command .mantine-Command-item {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Context Menu */
+.iran-yekan-context-menu {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-context-menu .mantine-Menu-item {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Popover */
+.iran-yekan-popover {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-popover .mantine-Popover-dropdown {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Hover Card */
+.iran-yekan-hover-card {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-hover-card .mantine-HoverCard-dropdown {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Drawer */
+.iran-yekan-drawer {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-drawer .mantine-Drawer-header {
+  text-align: right;
+  direction: rtl;
+}
+
+.iran-yekan-drawer .mantine-Drawer-body {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Overlay */
+.iran-yekan-overlay {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Portal */
+.iran-yekan-portal {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Scroll Area */
+.iran-yekan-scroll-area {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Virtual List */
+.iran-yekan-virtual-list {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Infinite Scroll */
+.iran-yekan-infinite-scroll {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Masonry */
+.iran-yekan-masonry {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Carousel */
+.iran-yekan-carousel {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+.iran-yekan-carousel .mantine-Carousel-slide {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Image */
+.iran-yekan-image {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Avatar */
+.iran-yekan-avatar {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Group */
+.iran-yekan-group {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Stack */
+.iran-yekan-stack {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Grid */
+.iran-yekan-grid {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Container */
+.iran-yekan-container {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Center */
+.iran-yekan-center {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Flex */
+.iran-yekan-flex {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Box */
+.iran-yekan-box {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Paper */
+.iran-yekan-paper {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Card */
+.iran-yekan-card {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Section */
+.iran-yekan-section {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Divider */
+.iran-yekan-divider {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
+/* Space */
+.iran-yekan-space {
+  font-family: 'IranYekan', 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+}
+
