@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
 import "./globals.css"
+import "../styles/fonts.css"
 import { MantineAppProvider } from "@/components/mantine-provider"
 import { ThemeWrapper } from "@/components/ThemeWrapper"
+import { FontProvider } from "@/contexts/FontContext"
 
 export const metadata: Metadata = {
   title: "داشبورد مدیریتی - Next.js + Mantine",
@@ -17,9 +19,11 @@ export default function RootLayout({
     <html lang="fa" dir="rtl" suppressHydrationWarning>
       <body suppressHydrationWarning={true}>
         <MantineAppProvider>
-          <ThemeWrapper>
-            {children}
-          </ThemeWrapper>
+          <FontProvider>
+            <ThemeWrapper>
+              {children}
+            </ThemeWrapper>
+          </FontProvider>
         </MantineAppProvider>
       </body>
     </html>

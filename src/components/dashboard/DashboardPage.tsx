@@ -8,7 +8,6 @@ import {
   Title,
   SimpleGrid,
   Progress,
-  RingProgress,
   Badge,
   Grid,
   Container,
@@ -20,7 +19,6 @@ import {
   IconShoppingCart,
   IconCurrencyDollar,
   IconPackage,
-  IconStar,
   IconActivity,
   IconArrowUpRight
 } from '@tabler/icons-react'

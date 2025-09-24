@@ -2,21 +2,19 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { 
-  Container, 
-  Card, 
-  TextInput, 
-  PasswordInput, 
-  Button, 
-  Title, 
-  Text, 
-  Group, 
-  ActionIcon, 
+import {
+  Container,
+  Card,
+  TextInput,
+  PasswordInput,
+  Button,
+  Title,
+  Text,
   Box,
   Alert,
   Stack
 } from '@mantine/core'
-import { IconSun, IconMoon, IconAlertCircle, IconLogin } from '@tabler/icons-react'
+import { IconAlertCircle, IconLogin } from '@tabler/icons-react'
 import { useTheme } from '@/contexts/ThemeContext'
 
 export default function LoginPage() {

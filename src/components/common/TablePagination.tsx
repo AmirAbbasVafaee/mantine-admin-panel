@@ -23,18 +23,7 @@ export function TablePagination({
   pageSizeOptions = [10, 20, 50, 100]
 }: TablePaginationProps) {
   const { isDark, colorTheme } = useTheme()
-  const { isMobile, isTablet } = useResponsive()
-
-  // Get theme color
-  const getThemeColor = () => {
-    const colors = {
-      blue: '#228be6',
-      green: '#40c057',
-      purple: '#7950f2',
-      orange: '#fd7e14'
-    }
-    return colors[colorTheme]
-  }
+  const { isMobile } = useResponsive()
   
   const totalPages = Math.ceil(total / pageSize)
   const startItem = (page - 1) * pageSize + 1

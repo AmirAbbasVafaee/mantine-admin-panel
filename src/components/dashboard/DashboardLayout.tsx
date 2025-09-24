@@ -13,7 +13,6 @@ import {
   Stack,
   Box,
   Burger,
-  TextInput,
 } from '@mantine/core'
 import {
   IconDashboard,
@@ -23,7 +22,6 @@ import {
   IconFileText,
   IconSettings,
   IconBell,
-  IconSearch,
   IconSun,
   IconMoon,
   IconLogout,
@@ -32,9 +30,11 @@ import {
 } from '@tabler/icons-react'
 import { useResponsive } from '@/hooks/useResponsive'
 import { useTheme } from '@/contexts/ThemeContext'
+import { useFont } from '@/contexts/FontContext'
 import { NotificationModal } from '@/components/modals/NotificationModal'
 import { GlobalSearch } from '@/components/common/GlobalSearch'
 import { MobileSearch } from '@/components/common/MobileSearch'
+import { FontSwitcher } from '@/components/common/FontSwitcher'
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -50,6 +50,7 @@ export function DashboardLayout({ children, activePage }: DashboardLayoutProps) 
 
   const router = useRouter()
   const { isDark, toggleTheme, colorTheme, setColorTheme } = useTheme()
+  const { currentFont, setCurrentFont } = useFont()
 
   // Calculate bell icon position when notification modal opens
   const handleNotificationClick = () => {
@@ -180,6 +181,11 @@ export function DashboardLayout({ children, activePage }: DashboardLayoutProps) 
             {!isMobile && <GlobalSearch />}
             {isMobile && <MobileSearch onSearch={handleMobileSearch} />}
             
+            <FontSwitcher 
+              currentFont={currentFont} 
+              onFontChange={setCurrentFont} 
+            />
+
             <ActionIcon
               variant="light"
               size="lg"

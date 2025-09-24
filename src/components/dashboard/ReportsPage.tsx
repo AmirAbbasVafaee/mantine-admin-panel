@@ -9,7 +9,6 @@ import {
   Title,
   SimpleGrid,
   Progress,
-  RingProgress,
   Badge,
   Grid,
   Box,

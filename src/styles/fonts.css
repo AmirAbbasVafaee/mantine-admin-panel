@@ -1,0 +1,196 @@
+/* ===== FONT STYLES FOR ADMIN PANEL ===== */
+
+/* Import Iran Yekan Font */
+@import url('https://raw.githubusercontent.com/AmirAbbasVafaee/iran-yekan-fn-cdn/main/css/iran-yekan.css');
+
+/* Vazir Font (Default) */
+.font-vazir {
+  font-family: 'Vazir', 'Tahoma', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Iran Yekan Font */
+.font-iran-yekan {
+  font-family: 'IranYekan', sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Apply font to all Mantine components and general elements */
+.font-vazir,
+.font-vazir *,
+.font-vazir .mantine-Text,
+.font-vazir .mantine-Title,
+.font-vazir .mantine-Button,
+.font-vazir .mantine-Input,
+.font-vazir .mantine-Select,
+.font-vazir .mantine-Textarea,
+.font-vazir .mantine-Card,
+.font-vazir .mantine-Modal,
+.font-vazir .mantine-Table,
+.font-vazir .mantine-Navbar,
+.font-vazir .mantine-Header,
+.font-vazir .mantine-Breadcrumbs,
+.font-vazir .mantine-Tabs,
+.font-vazir .mantine-Accordion,
+.font-vazir .mantine-Alert,
+.font-vazir .mantine-Notification,
+.font-vazir .mantine-Tooltip,
+.font-vazir .mantine-Popover,
+.font-vazir .mantine-Dropdown,
+.font-vazir .mantine-Menu,
+.font-vazir .mantine-Drawer,
+.font-vazir .mantine-Stepper,
+.font-vazir .mantine-Timeline,
+.font-vazir .mantine-Progress,
+.font-vazir .mantine-Skeleton,
+.font-vazir .mantine-LoadingOverlay,
+.font-vazir .mantine-Spotlight,
+.font-vazir .mantine-Command,
+.font-vazir .mantine-ContextMenu,
+.font-vazir .mantine-HoverCard,
+.font-vazir .mantine-Overlay,
+.font-vazir .mantine-Portal,
+.font-vazir .mantine-ScrollArea,
+.font-vazir .mantine-VirtualList,
+.font-vazir .mantine-InfiniteScroll,
+.font-vazir .mantine-Masonry,
+.font-vazir .mantine-Carousel,
+.font-vazir .mantine-Image,
+.font-vazir .mantine-Avatar,
+.font-vazir .mantine-Group,
+.font-vazir .mantine-Stack,
+.font-vazir .mantine-Grid,
+.font-vazir .mantine-Container,
+.font-vazir .mantine-Center,
+.font-vazir .mantine-Flex,
+.font-vazir .mantine-Box,
+.font-vazir .mantine-Paper,
+.font-vazir .mantine-Section,
+.font-vazir .mantine-Divider,
+.font-vazir .mantine-Space,
+.font-vazir h1,
+.font-vazir h2,
+.font-vazir h3,
+.font-vazir h4,
+.font-vazir h5,
+.font-vazir h6,
+.font-vazir p,
+.font-vazir span,
+.font-vazir div,
+.font-vazir a,
+.font-vazir button,
+.font-vazir input,
+.font-vazir textarea,
+.font-vazir select,
+.font-vazir label {
+  font-family: 'Vazir', 'Tahoma', sans-serif !important;
+  direction: rtl;
+  text-align: right;
+}
+
+.font-iran-yekan,
+.font-iran-yekan *,
+.font-iran-yekan .mantine-Text,
+.font-iran-yekan .mantine-Title,
+.font-iran-yekan .mantine-Button,
+.font-iran-yekan .mantine-Input,
+.font-iran-yekan .mantine-Select,
+.font-iran-yekan .mantine-Textarea,
+.font-iran-yekan .mantine-Card,
+.font-iran-yekan .mantine-Modal,
+.font-iran-yekan .mantine-Table,
+.font-iran-yekan .mantine-Navbar,
+.font-iran-yekan .mantine-Header,
+.font-iran-yekan .mantine-Breadcrumbs,
+.font-iran-yekan .mantine-Tabs,
+.font-iran-yekan .mantine-Accordion,
+.font-iran-yekan .mantine-Alert,
+.font-iran-yekan .mantine-Notification,
+.font-iran-yekan .mantine-Tooltip,
+.font-iran-yekan .mantine-Popover,
+.font-iran-yekan .mantine-Dropdown,
+.font-iran-yekan .mantine-Menu,
+.font-iran-yekan .mantine-Drawer,
+.font-iran-yekan .mantine-Stepper,
+.font-iran-yekan .mantine-Timeline,
+.font-iran-yekan .mantine-Progress,
+.font-iran-yekan .mantine-Skeleton,
+.font-iran-yekan .mantine-LoadingOverlay,
+.font-iran-yekan .mantine-Spotlight,
+.font-iran-yekan .mantine-Command,
+.font-iran-yekan .mantine-ContextMenu,
+.font-iran-yekan .mantine-HoverCard,
+.font-iran-yekan .mantine-Overlay,
+.font-iran-yekan .mantine-Portal,
+.font-iran-yekan .mantine-ScrollArea,
+.font-iran-yekan .mantine-VirtualList,
+.font-iran-yekan .mantine-InfiniteScroll,
+.font-iran-yekan .mantine-Masonry,
+.font-iran-yekan .mantine-Carousel,
+.font-iran-yekan .mantine-Image,
+.font-iran-yekan .mantine-Avatar,
+.font-iran-yekan .mantine-Group,
+.font-iran-yekan .mantine-Stack,
+.font-iran-yekan .mantine-Grid,
+.font-iran-yekan .mantine-Container,
+.font-iran-yekan .mantine-Center,
+.font-iran-yekan .mantine-Flex,
+.font-iran-yekan .mantine-Box,
+.font-iran-yekan .mantine-Paper,
+.font-iran-yekan .mantine-Section,
+.font-iran-yekan .mantine-Divider,
+.font-iran-yekan .mantine-Space,
+.font-iran-yekan h1,
+.font-iran-yekan h2,
+.font-iran-yekan h3,
+.font-iran-yekan h4,
+.font-iran-yekan h5,
+.font-iran-yekan h6,
+.font-iran-yekan p,
+.font-iran-yekan span,
+.font-iran-yekan div,
+.font-iran-yekan a,
+.font-iran-yekan button,
+.font-iran-yekan input,
+.font-iran-yekan textarea,
+.font-iran-yekan select,
+.font-iran-yekan label {
+  font-family: 'IranYekan', sans-serif !important;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Font weight utilities for Iran Yekan */
+.font-iran-yekan .font-thin {
+  font-weight: 100;
+}
+
+.font-iran-yekan .font-light {
+  font-weight: 300;
+}
+
+.font-iran-yekan .font-normal {
+  font-weight: 400;
+}
+
+.font-iran-yekan .font-medium {
+  font-weight: 500;
+}
+
+.font-iran-yekan .font-bold {
+  font-weight: 700;
+}
+
+.font-iran-yekan .font-extra-bold {
+  font-weight: 800;
+}
+
+.font-iran-yekan .font-black {
+  font-weight: 900;
+}
+
+.font-iran-yekan .font-extra-black {
+  font-weight: 950;
+}

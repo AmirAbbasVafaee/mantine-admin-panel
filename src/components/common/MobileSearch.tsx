@@ -9,15 +9,18 @@ import { useUsers } from '@/hooks/useUsers'
 import { useProducts } from '@/hooks/useProducts'
 import { useOrders } from '@/hooks/useOrders'
 import { useRouter } from 'next/navigation'
+import { User } from '@/types/user'
+import { Product } from '@/types/product'
+import { Order } from '@/types/order'
 
 interface SearchResult {
   type: 'user' | 'product' | 'order'
-  id: string
+  id: string | number
   title: string
   subtitle: string
   icon: string
   badge?: { text: string; color: string }
-  data: any
+  data: User | Product | Order
 }
 
 interface MobileSearchProps {
