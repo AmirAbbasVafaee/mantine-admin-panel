@@ -2,13 +2,22 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-type FontType = 'vazir' | 'iran-yekan';
+export type FontType = 'vazir' | 'iran-yekan' | 'kalameh' | 'peyda' | 'yekan-bakh';
 
 interface FontContextType {
   currentFont: FontType;
   setCurrentFont: (font: FontType) => void;
   toggleFont: () => void;
 }
+
+// Font display names in Persian
+export const fontDisplayNames: Record<FontType, string> = {
+  'vazir': 'وزیر',
+  'iran-yekan': 'ایران یکان',
+  'kalameh': 'کلمه',
+  'peyda': 'پیدا',
+  'yekan-bakh': 'یکان باخ'
+};
 
 const FontContext = createContext<FontContextType | undefined>(undefined);
 
@@ -22,7 +31,8 @@ export const FontProvider: React.FC<FontProviderProps> = ({ children }) => {
   // Load font preference from localStorage on mount
   useEffect(() => {
     const savedFont = localStorage.getItem('admin-panel-font') as FontType;
-    if (savedFont && (savedFont === 'vazir' || savedFont === 'iran-yekan')) {
+    const validFonts: FontType[] = ['vazir', 'iran-yekan', 'kalameh', 'peyda', 'yekan-bakh'];
+    if (savedFont && validFonts.includes(savedFont)) {
       setCurrentFont(savedFont);
     }
   }, []);
@@ -37,7 +47,10 @@ export const FontProvider: React.FC<FontProviderProps> = ({ children }) => {
   }, [currentFont]);
 
   const toggleFont = () => {
-    setCurrentFont(prev => prev === 'vazir' ? 'iran-yekan' : 'vazir');
+    const fonts: FontType[] = ['vazir', 'iran-yekan', 'kalameh', 'peyda', 'yekan-bakh'];
+    const currentIndex = fonts.indexOf(currentFont);
+    const nextIndex = (currentIndex + 1) % fonts.length;
+    setCurrentFont(fonts[nextIndex]);
   };
 
   const value: FontContextType = {

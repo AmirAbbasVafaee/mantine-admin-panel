@@ -3,6 +3,8 @@
 /* Import All Persian Fonts from CDN */
 @import url('https://cdn.jsdelivr.net/gh/AmirAbbasVafaee/persian-fonts-cdn@main/css/all-fonts.css');
 
+/* Fallback: If CDN fails, we'll still have basic font switching */
+
 /* ===== FONT CLASSES ===== */
 
 /* Vazir Font (Default) */

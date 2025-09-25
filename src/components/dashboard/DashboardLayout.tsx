@@ -30,7 +30,6 @@ import {
 } from '@tabler/icons-react'
 import { useResponsive } from '@/hooks/useResponsive'
 import { useTheme } from '@/contexts/ThemeContext'
-import { useFont } from '@/contexts/FontContext'
 import { NotificationModal } from '@/components/modals/NotificationModal'
 import { GlobalSearch } from '@/components/common/GlobalSearch'
 import { MobileSearch } from '@/components/common/MobileSearch'
@@ -50,7 +49,6 @@ export function DashboardLayout({ children, activePage }: DashboardLayoutProps) 
 
   const router = useRouter()
   const { isDark, toggleTheme, colorTheme, setColorTheme } = useTheme()
-  const { currentFont, setCurrentFont } = useFont()
 
   // Calculate bell icon position when notification modal opens
   const handleNotificationClick = () => {
@@ -181,10 +179,6 @@ export function DashboardLayout({ children, activePage }: DashboardLayoutProps) 
             {!isMobile && <GlobalSearch />}
             {isMobile && <MobileSearch onSearch={handleMobileSearch} />}
             
-            <FontSwitcher 
-              currentFont={currentFont} 
-              onFontChange={setCurrentFont} 
-            />
 
             <ActionIcon
               variant="light"
@@ -229,7 +223,7 @@ export function DashboardLayout({ children, activePage }: DashboardLayoutProps) 
               </Box>
             </ActionIcon>
 
-            <Menu>
+            <Menu closeOnItemClick={false}>
               <Menu.Target>
                 <UnstyledButton>
                   <Group gap="sm" wrap="nowrap">
@@ -266,6 +260,8 @@ export function DashboardLayout({ children, activePage }: DashboardLayoutProps) 
                 >
                   تنظیمات
                 </Menu.Item>
+                <Menu.Divider />
+                <FontSwitcher />
                 <Menu.Divider />
                 <Menu.Label>انتخاب رنگ</Menu.Label>
                 <Box p="xs">
